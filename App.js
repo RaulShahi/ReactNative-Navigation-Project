@@ -19,6 +19,8 @@ import FavoritesScreen from './screens/FavoritesScreen';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 import {FavoriteContextWrapper} from './store/context/favorites-context';
+import {Provider} from 'react-redux';
+import {store} from './store/redux/store';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -62,7 +64,8 @@ const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <FavoriteContextWrapper>
+      {/* <FavoriteContextWrapper> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName={DRAAWERSCREEN}
@@ -86,7 +89,8 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoriteContextWrapper>
+      </Provider>
+      {/* </FavoriteContextWrapper> */}
     </View>
   );
 };
