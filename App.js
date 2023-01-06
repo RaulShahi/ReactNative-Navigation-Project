@@ -18,6 +18,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import FavoritesScreen from './screens/FavoritesScreen';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import {FavoriteContextWrapper} from './store/context/favorites-context';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,29 +62,31 @@ const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName={DRAAWERSCREEN}
-          screenOptions={{
-            headerStyle: {backgroundColor: '#351401'},
-            headerTintColor: 'white',
-            contentStyle: {backgroundColor: '#3f2f25'},
-          }}>
-          <Stack.Screen
-            name={DRAAWERSCREEN}
-            component={DrawerNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name={MEALSOVERVIEW} component={MealsOverviewScren} />
-          <Stack.Screen
-            name={MEALDETAILS}
-            component={MealDetailScreen}
-            options={{title: 'About the Meal'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FavoriteContextWrapper>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName={DRAAWERSCREEN}
+            screenOptions={{
+              headerStyle: {backgroundColor: '#351401'},
+              headerTintColor: 'white',
+              contentStyle: {backgroundColor: '#3f2f25'},
+            }}>
+            <Stack.Screen
+              name={DRAAWERSCREEN}
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name={MEALSOVERVIEW} component={MealsOverviewScren} />
+            <Stack.Screen
+              name={MEALDETAILS}
+              component={MealDetailScreen}
+              options={{title: 'About the Meal'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoriteContextWrapper>
     </View>
   );
 };
